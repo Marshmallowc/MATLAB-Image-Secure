@@ -23,7 +23,7 @@ function multi_level_analysis_gui(original_image)
 
     % 参数设置
     arnold_iters = 5;
-    key = '1234567890123456'; % 16字节密钥，对应128位
+    key = 12345678; % 正整数密钥
     
     % 创建进度对话框
     h_wait = waitbar(0, '正在进行多级加密及分析，请稍候...');
