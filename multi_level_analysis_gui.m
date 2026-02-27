@@ -35,19 +35,19 @@ function multi_level_analysis_gui(original_image)
         enc_L1 = arnold_encrypt(original_image, arnold_iters);
         time_L1 = toc;
         
-        %% 二级加密：Arnold变换 + 位置置乱
-        waitbar(0.4, h_wait, '执行二级加密 (Arnold + 置乱)...');
+        %% 二级加密：Arnold变换 + XOR
+        waitbar(0.4, h_wait, '执行二级加密 (Arnold + XOR)...');
         tic;
         enc_L2_tmp = arnold_encrypt(original_image, arnold_iters);
-        [enc_L2, ~] = scramble_encrypt(enc_L2_tmp);
+        enc_L2 = xor_encrypt(enc_L2_tmp, key);
         time_L2 = toc;
         
-        %% 三级加密：Arnold变换 + 位置置乱 + XOR替换
-        waitbar(0.7, h_wait, '执行三级加密 (Arnold + 置乱 + XOR)...');
+        %% 三级加密：Arnold变换 + XOR + 位置置乱
+        waitbar(0.7, h_wait, '执行三级加密 (Arnold + XOR + 置乱)...');
         tic;
         enc_L3_tmp1 = arnold_encrypt(original_image, arnold_iters);
-        [enc_L3_tmp2, ~] = scramble_encrypt(enc_L3_tmp1);
-        enc_L3 = xor_encrypt(enc_L3_tmp2, key);
+        enc_L3_tmp2 = xor_encrypt(enc_L3_tmp1, key);
+        [enc_L3, ~] = scramble_encrypt(enc_L3_tmp2);
         time_L3 = toc;
         
         %% 计算评估指标
@@ -104,11 +104,11 @@ function multi_level_analysis_gui(original_image)
         
         subplot(2, 3, 5);
         imshow(enc_L2);
-        title('二级加密(Arnold+置乱)');
+        title('二级加密(Arnold+XOR)');
         
         subplot(2, 3, 6);
         imshow(enc_L3);
-        title('三级加密(Arnold+置乱+XOR)');
+        title('三级加密(Arnold+XOR+置乱)');
         
         % 增加结论文本框
         annotation('textbox', [0.1, 0.01, 0.8, 0.08], 'String', ...
