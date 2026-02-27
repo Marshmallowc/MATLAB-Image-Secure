@@ -1,0 +1,14 @@
+# MATLAB files
+*.asv
+*.m~
+*~
+*.mat
+*.mex*
+*.slxc
+*.autosave
+
+# Potential temporary or output folders
+encryption_results/
+
+# macOS files
+.DS_Store
