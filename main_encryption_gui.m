@@ -125,7 +125,7 @@ function main_encryption_gui()
                                'FontSize', 10, 'FontWeight', 'bold', ...
                                'BackgroundColor', [0.9, 0.6, 0.1], ...
                                'ForegroundColor', 'white', ...
-                               'Callback', @(~,~) multi_level_analysis_gui(original_image));
+                               'Callback', @run_multi_level_analysis);
     
     % 保存结果按钮
     save_btn = uicontrol('Parent', control_scroll_panel, 'Style', 'pushbutton', ...
@@ -412,6 +412,14 @@ function main_encryption_gui()
         
         % 创建分析窗口
         analysis_gui();
+    end
+
+    function run_multi_level_analysis(~, ~)
+        if isempty(original_image)
+            update_status('请先导入图像！');
+            return;
+        end
+        multi_level_analysis_gui(original_image);
     end
 
     function save_results(~, ~)
