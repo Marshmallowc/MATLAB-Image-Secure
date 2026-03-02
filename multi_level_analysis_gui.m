@@ -2,17 +2,22 @@ function multi_level_analysis_gui(original_image)
     % 多级加密对比分析界面
     % 对比一级（Arnold）、二级（Arnold+置乱）、三级（Arnold+置乱+XOR）的开销与收益
     
-    if nargin < 1
-        % 如果没有传入图像，尝试使用默认测试图像
-        sample_path = fullfile(pwd, 'cat.png');
-        if exist(sample_path, 'file')
-            original_image = imread(sample_path);
-            if size(original_image, 3) == 3
-                original_image = rgb2gray(original_image);
-            end
+    if nargin < 1 || isempty(original_image)
+        % 如果遇到因MATLAB缓存机制导致传入空图像，则直接弹出选择框让用户重新选图
+        [filename, pathname] = uigetfile({'*.jpg;*.jpeg;*.png;*.bmp;*.tif', ...
+            '图像文件 (*.jpg, *.jpeg, *.png, *.bmp, *.tif)'}, '系统检测到图像为空，请重新选择图像');
+            
+        if filename ~= 0
+            original_image = imread(fullfile(pathname, filename));
         else
-            errordlg('请先从主界面导入图像！', '错误');
-            return;
+            % 用户取消选择，尝试使用默认测试图像
+            sample_path = fullfile(pwd, 'cat.png');
+            if exist(sample_path, 'file')
+                original_image = imread(sample_path);
+            else
+                errordlg('未能获取到有效图像，请在MATLAB命令行输入 close all; clear 后重新运行系统！', '错误');
+                return;
+            end
         end
     end
 
