@@ -16,7 +16,7 @@ function corr_val = calculate_correlation(img1, img2)
     
     % 检查图像是否为空
     if isempty(img1) || isempty(img2)
-        error('输入图像不能为空');
+        error('输入图像不能为空 in calculate_correlation.m');
     end
     
     % 转换为双精度并展平

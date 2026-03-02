@@ -7,7 +7,7 @@ function multi_level_analysis_gui(original_image)
         [filename, pathname] = uigetfile({'*.jpg;*.jpeg;*.png;*.bmp;*.tif', ...
             '图像文件 (*.jpg, *.jpeg, *.png, *.bmp, *.tif)'}, '系统检测到图像为空，请重新选择图像');
             
-        if filename ~= 0
+        if ischar(filename)
             original_image = imread(fullfile(pathname, filename));
         else
             % 用户取消选择，尝试使用默认测试图像

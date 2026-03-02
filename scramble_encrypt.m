@@ -5,7 +5,7 @@ function [scrambled_img, sequence] = scramble_encrypt(image, seed)
     
     % 输入验证
     if isempty(image)
-        error('输入图像不能为空');
+        error('输入图像不能为空 in scramble_encrypt.m');
     end
     
     image = uint8(image);

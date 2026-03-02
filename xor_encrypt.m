@@ -5,7 +5,7 @@ function encrypted_img = xor_encrypt(image, key)
     
     % 输入验证
     if isempty(image)
-        error('输入图像不能为空');
+        error('输入图像不能为空 in xor_encrypt.m');
     end
     
     if nargin < 2 || isempty(key)

@@ -6,7 +6,7 @@ function transformed_img = arnold_transform(image)
     
     % 输入验证
     if isempty(image)
-        error('输入图像不能为空');
+        error('输入图像不能为空 in arnold_transform.m');
     end
     
     [N, M] = size(image);

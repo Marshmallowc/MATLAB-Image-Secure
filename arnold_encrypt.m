@@ -5,7 +5,7 @@ function arnold_img = arnold_encrypt(image, iterations)
     
     % 输入验证
     if isempty(image)
-        error('输入图像不能为空');
+        error('输入图像不能为空 in arnold_encrypt.m');
     end
     
     if nargin < 2 || isempty(iterations)
